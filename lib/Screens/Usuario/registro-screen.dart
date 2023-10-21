@@ -2,10 +2,10 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:signavox/Screens/Menu/inicio.dart';
 import '../../Services/auth_services.dart';
 import '../../Services/var_globals.dart';
 import '../../animation/FadeAnimation.dart';
-import '../../main.dart';
 import 'login-screen.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -31,10 +31,15 @@ class _RegisterPageState extends State<RegisterPage> {
       if (response.statusCode == 200) {
         messageSnackBar(context, 'Registrado correctamente!');
         Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (BuildContext context) => const HomePage(),
-            ));
+          context,
+          MaterialPageRoute(
+            builder: (BuildContext context) => Inicio(
+              userName: _name, // Nombre de usuario
+              userEmail: _email, // Correo electrónico
+              userPhotoUrl: "URL_de_la_Foto",
+            ),
+          ),
+        );
       } else {
         errorSnackBar(context, responseMap.values.first[0]);
       }
@@ -160,8 +165,11 @@ class _RegisterPageState extends State<RegisterPage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    const LoginPage(),
+                                builder: (BuildContext context) => LoginPage(
+                                  userName: '',
+                                  userEmail: '',
+                                  userPhotoUrl: '',
+                                ),
                               ));
                         },
                         child: const Text(

@@ -1,18 +1,26 @@
-// ignore_for_file: file_names, use_build_context_synchronously
+// ignore_for_file: file_names, use_key_in_widget_constructors, prefer_const_constructors_in_immutables, library_private_types_in_public_api, use_build_context_synchronously
 
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:signavox/Screens/Menu/inicio.dart';
 import '../../Services/auth_services.dart';
 import '../../Services/var_globals.dart';
 import '../../animation/FadeAnimation.dart';
 import 'package:http/http.dart' as http;
-
-import '../../main.dart';
 import 'registro-screen.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  final String userName; // Nombre de usuario
+  final String userEmail; // Correo electrónico del usuario
+  final String userPhotoUrl; // URL de la foto de perfil
+
+  LoginPage({
+    Key? key,
+    required this.userName,
+    required this.userEmail,
+    required this.userPhotoUrl,
+  });
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -28,10 +36,15 @@ class _LoginPageState extends State<LoginPage> {
       Map responseMap = jsonDecode(response.body);
       if (response.statusCode == 200) {
         Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (BuildContext context) => const HomePage(),
-            ));
+          context,
+          MaterialPageRoute(
+            builder: (BuildContext context) => Inicio(
+              userName: widget.userName,
+              userEmail: widget.userEmail,
+              userPhotoUrl: widget.userPhotoUrl,
+            ),
+          ),
+        );
       } else {
         errorSnackBar(context, responseMap.values.first);
       }

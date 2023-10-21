@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
-const String baseURL = "http://127.0.0.1:8000/api/"; //emulator localhost
+//Opcion 1 para usar el backend de la api
+//const String baseURL = "http://127.0.0.1:8000/api/"; //emulator localhost
+// Opcion 2 para usar el backend de la api, cambiar por su ip
+const String baseURL = "http://192.168.100.9/SignaVoxB/public/api/"; //emulator localhost
 const Map<String, String> headers = {"Content-Type": "application/json"};
 
 errorSnackBar(BuildContext context, String text) {
